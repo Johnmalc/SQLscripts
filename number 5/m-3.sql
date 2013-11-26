@@ -7,8 +7,3 @@ SELECT city
 
 where telefon not Like '+44%'
 GO
-
-Select city, telefon
-from Fil
-where 
-
