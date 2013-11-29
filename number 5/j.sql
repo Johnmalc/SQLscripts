@@ -5,7 +5,13 @@ GO
 -- http://stackoverflow.com/questions/15745042/efficiently-convert-rows-to-columns-in-sql-server-2008
 -- CAST(Zahl as float) 
 
-SELECT TOP 1 MAX(F/M) as test, [Branch ID]
+--SELECT        CAST(COUNT(dbo.Mit.[EMPl Id]) AS float) AS zahl, ISNULL(dbo.Mit.Gender, '0') AS Gender, dbo.Mit.[Branch ID], dbo.Fil.city
+--FROM            dbo.Fil INNER JOIN
+--                         dbo.Mit ON dbo.Fil.[Branch ID] = dbo.Mit.[Branch ID]
+--GROUP BY dbo.Mit.Gender, dbo.Mit.[Branch ID], dbo.Fil.city
+
+
+SELECT  MAX(F/M) as test, [Branch ID]
 FROM Bill_j
 pivot ( MAX(Zahl) for Gender in (M,F) ) as s 
 group by [Branch ID]
