@@ -6,4 +6,5 @@ SELECT city
   FROM [dbo].[Fil]
 
 where telefon not Like '+44%'
+ 
 GO

@@ -5,7 +5,7 @@ GO
 -- http://stackoverflow.com/questions/15745042/efficiently-convert-rows-to-columns-in-sql-server-2008
 -- CAST(Zahl as float) 
 
-SELECT MAX(F/M) as test, [Branch ID]
+SELECT TOP 1 MAX(F/M) as test, [Branch ID]
 FROM Bill_j
 pivot ( MAX(Zahl) for Gender in (M,F) ) as s 
 group by [Branch ID]
