@@ -6,7 +6,7 @@ GO
 -- CAST(Zahl as float) 
 
 SELECT MAX(F/M) as test, [Branch ID]
-FROM Bill
+FROM Bill_j
 pivot ( MAX(Zahl) for Gender in (M,F) ) as s 
 group by [Branch ID]
 order by test DESC 
