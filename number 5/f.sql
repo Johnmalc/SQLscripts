@@ -3,7 +3,7 @@ GO
 -- This usually means your SQL statement is joining on more than one table, and doesn't know which column you're trying to retrieve.
 -- http://databases.aspfaq.com/database/what-does-ambiguous-column-name-mean.html
 SELECT [EMPl Id]
-	  ,[Branch ID] = [dbo].[Fil].[Branch ID]
+	  ,[dbo].[Fil].[Branch ID]
       ,[Name]
       ,[Gender]
       ,[Position]
