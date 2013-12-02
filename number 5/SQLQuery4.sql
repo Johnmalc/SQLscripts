@@ -3,7 +3,7 @@ GO
 
 SELECT *
   FROM [dbo].[Mit]
-  where [Branch ID]='B012'
+  where [Branch ID]='B002'
 GO
 
 
