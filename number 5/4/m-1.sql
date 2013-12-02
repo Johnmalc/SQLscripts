@@ -1,6 +1,6 @@
 USE [StayHomewithoutPer]
 GO
--- nerozumim, ujasnit si zda a co je namysli -> ????
+
 SELECT [EMPl Id]
       ,[Name]
       ,[reports to the Boss]
