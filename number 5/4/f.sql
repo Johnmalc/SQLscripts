@@ -7,8 +7,17 @@ SELECT [EMPl Id]
       ,[Name]
       ,[Gender]
       ,[Position]
-  FROM [dbo].[Mit], [dbo].[Fil]
-  where [Mit].[Branch ID] = [Fil].[Branch ID] AND [Fil].[Branch ID] = 'B014' AND [Mit].Position = 'Assistant' AND [Mit].Gender = 'F' 
+  FROM [dbo].[Mit] Join [dbo].[Fil] on [Mit]. [Branch ID] = [Fil].[Branch ID] 
+  where [Fil].[Branch ID] = 'B014' AND [Mit].Position = 'Assistant' AND [Mit].Gender = 'F' 
 GO
+-- same 
+--SELECT [EMPl Id]
+--	  ,[dbo].[Fil].[Branch ID]
+--      ,[Name]
+--      ,[Gender]
+--      ,[Position]
+--  FROM [dbo].[Mit] , [dbo].[Fil]  
+--  where [Mit]. [Branch ID] = [Fil].[Branch ID] And [Fil].[Branch ID] = 'B014' AND [Mit].Position = 'Assistant' AND [Mit].Gender = 'F' 
+--GO
 
 

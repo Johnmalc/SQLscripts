@@ -9,7 +9,7 @@ SELECT [EMPl Id]
       ,[Branch ID]
       ,[Position]
   FROM [dbo].[Mit]
-  where [Name] LIKE 'John %'
+  where [Name] LIKE 'John%'
 GO
 
 

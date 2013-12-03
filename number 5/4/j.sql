@@ -16,5 +16,4 @@ FROM Bill_j
 pivot ( MAX(Zahl) for Gender in (M,F) ) as s 
 group by [Branch ID], F, M -- oder ohne F, M aber dann mit Max(F/M)
 order by test DESC 
-
 GO
