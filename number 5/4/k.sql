@@ -1,4 +1,4 @@
-USE [StayHomewithoutPer]
+USE [StayHomewithoutPer];
 GO
 
 ----View 
@@ -20,11 +20,30 @@ GO
 
 -- http://technet.microsoft.com/en-us/library/ms177410%28v=sql.105%29.aspx
 --PIVOT(<aggregation function>(<column being aggregated>)
- -- wenn nicht isnull dann wird "NULL" in field sein  
+-- wenn nicht isnull dann wird "NULL" in field sein  
 
-SELECT [Branch ID], ISNULL(M, 0) as M, ISNULL(F, 0) as F
-  FROM Bill_k
-  pivot( Sum(zahl) for Gender in (M,F) ) as test
-GO
+SELECT [Branch ID] , 
+       ISNULL( M , 0
+             )AS M , 
+       ISNULL( F , 0
+             )AS F
+  FROM( 
+        SELECT [Branch ID] , 
+               MAX( CASE
+                    WHEN Gender = 'M' THEN zahl
+                    END
+                  )AS M , 
+               MAX( CASE
+                    WHEN Gender = 'F' THEN zahl
+                    END
+                  )AS F
+          FROM Bill_k
+          GROUP BY [Branch ID]
+      )AS tor;
+
+--SELECT [Branch ID], ISNULL(M, 0) as M, ISNULL(F, 0) as F
+--  FROM Bill_k
+--  pivot( Sum(zahl) for Gender in (M,F) ) as test
+--GO
 
 
