@@ -11,9 +11,18 @@ GO
 --                         dbo.Mit ON dbo.Fil.[Branch ID] = dbo.Mit.[Branch ID]
 --GROUP BY dbo.Mit.Gender, dbo.Mit.[Branch ID], dbo.Fil.city
 
-SELECT TOP 1 F/M as test, [Branch ID]
+SELECT [Branch ID], Max(case when Gender='M' then zahl end) as M, Max (case when Gender='F' then zahl end) as F, M/F
 FROM Bill_j
-pivot ( MAX(Zahl) for Gender in (M,F) ) as s 
+-- TOP 1 F/M as test, 
+--pivot ( MAX(Zahl) for Gender in (M,F) ) as s 
+group by [Branch ID] -- oder ohne F, M aber dann mit Max(F/M)
+--order by test DESC 
+GO
+
+
+SELECT F/M as test, [Branch ID]
+FROM Bill_j
+pivot ( MAX(Zahl) for Gender in (M,F) ) as s
 group by [Branch ID], F, M -- oder ohne F, M aber dann mit Max(F/M)
-order by test DESC 
+order by test DESC
 GO
