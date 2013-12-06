@@ -9,7 +9,7 @@ GO
 --  where exists (Select Name, Gender, Gehalt, [EMPl Id] From Mit where [reports to the Boss]= )
 ----  group by [reports to the Boss]
 --GO
-
+-- zeigt kein 48 weil er 0 untergeben hat ->  48 hat keinen assisten -> null
 SELECT [EMPl Id] , 
        name , 
        gender , 
@@ -20,23 +20,21 @@ SELECT [EMPl Id] ,
                       SELECT [reports to the Boss]
                         FROM Mit
 				    GROUP BY [reports to the Boss]
-                        HAVING COUNT(*) < 2 or COUNT(*) =0
+                        HAVING COUNT(*) < 2 
+				    --and COUNT(*) =0
 				 --   order by [reports to the Boss]
                     )
-    AND position
-        = 
-        'Supervisor'
-intersect 
-select [EMPl Id] , 
-       name , 
-       gender , 
-       Gehalt , 
-       position
-	  from Mit
-	 where position
-        = 
-        'Supervisor'
+    AND position = 'Supervisor'
+--intersect 
+--select [EMPl Id] , 
+--       name , 
+--       gender , 
+--       Gehalt , 
+--       position
+--	  from Mit
+--	 where position
+--        = 
+--        'Supervisor'
 
 	 -- where [EMPl Id] = 48
 
--- 48 hat keinen assisten -> null
