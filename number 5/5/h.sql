@@ -2,7 +2,7 @@ USE [StayHomewithoutPer]
 GO
 -- http://www.codespaces.com/blog/2011/02/24/oracle-limiting-the-number-of-records-like-top-n-limit/
 WITH staff_order AS (
-    SELECT Mit.[EMPl Id], row_number() over (ORDER BY Mit.Gehalt desc) AS rownumber
+    SELECT Mit.[EMPl Id], row_number() over (ORDER BY Mit.Gehalt DESC) AS rownumber
         FROM Mit )
 
 SELECT *

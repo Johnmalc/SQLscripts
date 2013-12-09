@@ -7,7 +7,7 @@ WITH assG
            FROM Mit
            WHERE Mit.Position = 'Assistant' ) 
     ,manG
-    AS ( SELECT ROUND( AVG( Gehalt ) ,2 )AS Manager
+    AS ( SELECT ROUND( AVG( Gehalt ) ,2 )AS Manager 
            FROM Mit
            WHERE Position = 'Manager' ) 
     ,supG
@@ -19,12 +19,17 @@ WITH assG
            FROM Mit
            WHERE Position = 'Director' )
     ,neuG
-    AS (SELECT 2 * Gehalt as neuG
+    AS (SELECT 2 * Mit.Gehalt as neuG, Mit.[EMPl Id]
 	   FROM Mit)
 
 					 
     -- f) Gibt es Mitarbeiter die mehr doppelt soviel verdienen, als der Durchschnitt ihrer Untergebenen? 
-    SELECT Distinct Mit.[EMPl Id] --, 2 * Gehalt as neuG
-      FROM Mit, manG, supG, neuG, dirG, assG
+    SELECT distinct neuG.[EMPl Id] 
+      FROM manG, supG, neuG, dirG, assG
 	   WHERE neuG > manG.Manager and neuG > supG.Supervisor and neuG > dirG.Director and neuG > assG.Assistant
+
 GO
+
+
+
+
