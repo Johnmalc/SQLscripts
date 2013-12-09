@@ -2,7 +2,8 @@ USE [StayHomewithoutPer];
 GO
 
 -- Avarage pro gruppe
-WITH assG
+WITH 
+    assG
     AS ( SELECT ROUND( AVG( Mit.Gehalt ) ,2 )AS Assistant
            FROM Mit
            WHERE Mit.Position = 'Assistant' ) 
@@ -23,8 +24,8 @@ WITH assG
 	   FROM Mit)
 
 					 
-    -- f) Gibt es Mitarbeiter die mehr doppelt soviel verdienen, als der Durchschnitt ihrer Untergebenen? 
-    SELECT distinct neuG.[EMPl Id] 
+    -- f) Gibt es Mitarbeiter die mehr doppelt soviel verdienen, als der Durchschnitt (alle) ihrer Untergebenen? 
+    SELECT * --, neuG.[EMPl Id] 
       FROM manG, supG, neuG, dirG, assG
 	   WHERE neuG > manG.Manager and neuG > supG.Supervisor and neuG > dirG.Director and neuG > assG.Assistant
 

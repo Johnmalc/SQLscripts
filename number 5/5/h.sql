@@ -7,7 +7,7 @@ WITH staff_order AS (
 
 SELECT *
   FROM Mit, staff_order
-  where staff_order.[EMPl Id] = Mit.[EMPl Id] and staff_order.rownumber <= 11
+  where staff_order.[EMPl Id] = Mit.[EMPl Id] and staff_order.rownumber <= 10
   order by Mit.Gehalt DESC
 GO
 

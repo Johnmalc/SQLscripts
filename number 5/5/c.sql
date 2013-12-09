@@ -2,13 +2,6 @@ USE [StayHomewithoutPer];
 GO
 -- http://www.datenbankforum.com/threads/theoretische-frage-zu-einer-abfrage-mit-union.1243/
 -- c) Welche Supervisors haben weniger als zwei Untergebene? 
---SELECT 
----- count([EMPl Id]) as anzahl_mitarbeiter,
---	Name, Gender, Gehalt, [EMPl Id]
---  FROM [dbo].[Mit]
---  where exists (Select Name, Gender, Gehalt, [EMPl Id] From Mit where [reports to the Boss]= )
-----  group by [reports to the Boss]
---GO
 -- zeigt kein 48 weil er 0 untergeben hat ->  48 hat keinen assisten -> null
 WITH sdf
     AS ( SELECT Mit.[reports to the Boss] AS empno ,
