@@ -10,31 +10,35 @@ GO
 ----  group by [reports to the Boss]
 --GO
 -- zeigt kein 48 weil er 0 untergeben hat ->  48 hat keinen assisten -> null
-SELECT [EMPl Id] , 
-       name , 
-       gender , 
-       Gehalt , 
-       position
-  FROM Mit
-  WHERE [EMPl Id] IN( 
-                      SELECT [reports to the Boss]
-                        FROM Mit
-				    GROUP BY [reports to the Boss]
-                        HAVING COUNT(*) < 2 
-				    --and COUNT(*) =0
-				 --   order by [reports to the Boss]
-                    )
-    AND position = 'Supervisor'
---intersect 
---select [EMPl Id] , 
---       name , 
---       gender , 
---       Gehalt , 
---       position
---	  from Mit
---	 where position
---        = 
---        'Supervisor'
+WITH sdf
+    AS ( SELECT Mit.[reports to the Boss] AS empno ,
+                COUNT( * )AS te
+           FROM Mit
+           GROUP BY Mit.[reports to the Boss] )
+    SELECT [EMPl Id] ,
+           name ,
+           gender ,
+           Gehalt ,
+           position
+    --,ISNULL(null, 0) -- nicht notig
+      FROM Mit
+      WHERE [EMPl Id] IN(SELECT [reports to the Boss]
+                           FROM Mit
+                           GROUP BY [reports to the Boss]
+                           HAVING COUNT( * ) < 2)
+        AND position = 'Supervisor'
+    UNION
+    SELECT DISTINCT [EMPl Id] ,
+                    name ,
+                    gender ,
+                    Gehalt ,
+                    position
+    -- sdf.empno AS Num_subordinates -- kann sein
+      FROM
+           Mit s LEFT JOIN sdf
+           ON sdf.empno = s.[EMPl Id]
+      WHERE Position = 'Supervisor'
+        AND sdf.empno IS NULL;
+  GO
 
-	 -- where [EMPl Id] = 48
 
