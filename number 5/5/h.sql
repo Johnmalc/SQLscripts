@@ -1,15 +1,44 @@
-USE [StayHomewithoutPer]
+USE [StayHomewithoutPer];
 GO
+-- top -> manual
 -- http://www.codespaces.com/blog/2011/02/24/oracle-limiting-the-number-of-records-like-top-n-limit/
-WITH staff_order AS (
-    SELECT Mit.[EMPl Id], row_number() over (ORDER BY Mit.Gehalt DESC) AS rownumber
-        FROM Mit )
+-- http://technet.microsoft.com/en-us/library/ms186734.aspx
+-- http://troels.arvin.dk/db/rdbms/#select-limit 
+--WITH staff_order
+--    AS ( SELECT Mit.[EMPl Id] ,
+--                ROW_NUMBER( )OVER( ORDER BY Mit.Gehalt DESC )AS rownumber
+--           FROM Mit )
+--    -- 2 spalten; rownumber  return number of a row
+--    --It looks at the data after the where clause is
+--    --applied, and is applied in an order that we specify using the keyword OVER. 
+--    --, to use row_number() to filter the number of rows returns, we must use a subquery.
+    
+--    -- this applies the sort order of row_number
+--    -- ROW_NUMBER( ) = Returns the sequential number of a row within a partition of a result set,
+
+--    SELECT Mit.*
+--      FROM Mit ,staff_order
+--      WHERE staff_order.[EMPl Id] = Mit.[EMPl Id]
+--        AND staff_order.rownumber <= 10
+--      ORDER BY Mit.Gehalt DESC;
+GO
+
+-- oben ist gleiche wie unter
+
+SELECT TOP 10 *
+  FROM Mit
+ -- ORDER BY Mit.Gehalt DESC;
+
+GO
+
+-- "Find all persons (px) such that the number of other persons (py) is less than 3".
 
 SELECT *
-  FROM Mit, staff_order
-  where staff_order.[EMPl Id] = Mit.[EMPl Id] and staff_order.rownumber <= 10
-  order by Mit.Gehalt DESC
-GO
+  FROM Mit AS px
+  WHERE exists (SELECT COUNT( * )
+          FROM Mit AS py
+		-- here min/max
+          WHERE py.Gehalt > px.Gehalt) < 10
+  --ORDER BY px.Gehalt DESC;
 
---Select TOP 10 * From Mit order by Mit.Gehalt DESC
---GO
+GO
