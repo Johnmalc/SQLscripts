@@ -30,12 +30,12 @@ SELECT TOP 10 *
  -- ORDER BY Mit.Gehalt DESC;
 
 GO
-
+-- nimmt hier die hoheren 10 in der Mit
 -- "Find all persons (px) such that the number of other persons (py) is less than 3".
-
+-- nimmt die 10 hochsten (geordnet nach dem Gehalt)
 SELECT *
   FROM Mit AS px
-  WHERE exists (SELECT COUNT( * )
+  WHERE (SELECT COUNT( * )
           FROM Mit AS py
 		-- here min/max
           WHERE py.Gehalt > px.Gehalt) < 10
