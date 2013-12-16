@@ -35,5 +35,5 @@ WITH cteLevels( Id ,
       FROM
            MIt INNER JOIN cteLevels
            ON cteLevels.Id = Mit.[EMPl Id]
-      ORDER BY [Order]; -- muss sein wegen ordnung 
+      ORDER BY [Order] -- muss sein wegen ordnung 
 GO
