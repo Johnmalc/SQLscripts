@@ -21,8 +21,6 @@ GO
 --      WHERE staff_order.[EMPl Id] = Mit.[EMPl Id]
 --        AND staff_order.rownumber <= 10
 --      ORDER BY Mit.Gehalt DESC;
-GO
-
 -- oben ist gleiche wie unter
 
 SELECT TOP 10 *
@@ -35,10 +33,17 @@ GO
 -- nimmt die 10 hochsten (geordnet nach dem Gehalt)
 SELECT *
   FROM Mit AS px
-  WHERE (SELECT COUNT( * )
-          FROM Mit AS py
+  WHERE(SELECT COUNT ( * )
+		FROM Mit AS py
 		-- here min/max
-          WHERE py.Gehalt > px.Gehalt) < 10
-  --ORDER BY px.Gehalt DESC;
+		WHERE py.Gehalt > px.Gehalt) < 10;
+--ORDER BY px.Gehalt DESC;
 
 GO
+
+
+SELECT *
+  FROM Mit d
+  WHERE 10 > (SELECT COUNT ( * )
+			 FROM Mit r
+			 WHERE r.Gehalt > d.Gehalt);

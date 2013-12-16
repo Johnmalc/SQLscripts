@@ -12,11 +12,11 @@ from Mit m
 where exists (
   select * from Mit e
   where m.[EMPl Id] = e.[reports to the Boss]
-  and m.Gehalt < e.Gehalt -- bei m wird leere menge
+  and e.Gehalt > m.Gehalt -- bei m wird leere menge
 )
 
 GO
-
+-- same
 -- unkor
 select m.[EMPl Id], m.Name, m.Gehalt
 from Mit m
