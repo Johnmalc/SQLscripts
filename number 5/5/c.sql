@@ -62,7 +62,7 @@ SELECT x.*
 	   and 
 	   NOT EXISTS(SELECT *
 				 FROM Mit y
-				 WHERE x.[EMPl Id] = y.[EMPl Id]); 
+				 WHERE x.[EMPl Id] = y.[reports to the Boss]); 
 
 
 
