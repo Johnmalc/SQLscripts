@@ -8,29 +8,27 @@ update Fil set city = 'Reutlingen'  where [Branch ID] = 'B001'
 
 select * from Fil where [Branch ID] = 'B001'
 
-rollback work
+rollback TRANSACTION
 
 --P2
-begin transaction;
-SET TRANSACTION ISOLATION LEVEL REPEATABLE READ;
+SET TRANSACTION ISOLATION LEVEL REPEATABLE READ
+begin transaction
 select * from Fil where [Branch ID] = 'B001'
-
 
 select * from Fil where [Branch ID] = 'B001'
 
 --P3
-begin transaction;
-SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
+SET TRANSACTION ISOLATION LEVEL READ COMMITTED
+begin transaction
 select * from Fil where [Branch ID] = 'B001'
 
 --P4
-begin transaction;
-SET TRANSACTION ISOLATION LEVEL REPEATABLE READ;
+SET TRANSACTION ISOLATION LEVEL REPEATABLE READ
+begin transaction
 select * from Fil where [Branch ID] = 'B001'
-rollback work
-
+rollback TRANSACTION
 
 --P5
 SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;
 select * from Fil where [Branch ID] = 'B001'
-rollback work
+rollback TRANSACTION
