@@ -33,10 +33,12 @@ WITH
 GO
 
 
---better
-Select *
-From Mit
-Where Gehalt > All (Select (avg (Gehalt))*2 From Mit)
+--better / seine
+
+Select r.*
+From Mit r
+Where Gehalt > (Select 2*(avg (Gehalt)) From Mit)
+ and [reports to the Boss] = r.[EMPl Id]
 
 
 
