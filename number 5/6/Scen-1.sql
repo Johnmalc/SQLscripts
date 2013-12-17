@@ -1,23 +1,65 @@
 --http://technet.microsoft.com/en-us/library/ms173763.aspx
-USE [StayHomewithoutPer]
+USE [StayHomewithoutPer];
 
 -- Scenario 1
 
 --P1
-rollback TRANSACTION
+BEGIN TRANSACTION;
+UPDATE Fil
+SET city = 'Edinburgh'
+  WHERE [Branch ID] = 'B001';
+
+ROLLBACK TRANSACTION;
+
 --P2
-SET TRANSACTION ISOLATION LEVEL REPEATABLE READ
-begin transaction
-select * from Fil where [Branch ID] = 'B001'
-commit TRANSACTION
+SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
+BEGIN TRANSACTION;
+SELECT *
+  FROM Fil
+  WHERE [Branch ID] = 'B001';
+COMMIT TRANSACTION;
+
+SELECT *
+  FROM Fil
+  WHERE [Branch ID] = 'B001';
+
+
 --P3
 SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
-begin transaction
-update Fil set city = 'Reutlingen'  where [Branch ID] = 'B001'
+
+BEGIN TRANSACTION;
+SELECT *
+  FROM Fil
+  WHERE [Branch ID] = 'B001';
+COMMIT TRANSACTION;
+
+SELECT *
+  FROM Fil
+  WHERE [Branch ID] = 'B001';
+
 --P4
 SET TRANSACTION ISOLATION LEVEL REPEATABLE READ;
-begin transaction
-select * from Fil where [Branch ID] = 'B001'
-commit TRANSACTION
+
+BEGIN TRANSACTION;
+SELECT *
+  FROM Fil
+  WHERE [Branch ID] = 'B001';
+COMMIT TRANSACTION;
+
+SELECT *
+  FROM Fil
+  WHERE [Branch ID] = 'B001';
+
 --P5
 SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;
+
+BEGIN TRANSACTION;
+SELECT *
+  FROM Fil
+  WHERE [Branch ID] = 'B001';
+COMMIT TRANSACTION;
+
+SELECT *
+  FROM Fil
+  WHERE [Branch ID] = 'B001';
+

@@ -4,7 +4,7 @@ USE [StayHomewithoutPer]
 
 --P1
 begin transaction;
-update Fil set city = 'Reutlingen'  where [Branch ID] = 'B001'
+update Fil set city = 'Edinburgh'  where [Branch ID] = 'B001'
 
 select * from Fil where [Branch ID] = 'B001'
 
