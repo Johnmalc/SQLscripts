@@ -33,5 +33,10 @@ WITH
 GO
 
 
+--better
+Select *
+From Mit
+Where Gehalt > All (Select (avg (Gehalt))*2 From Mit)
+
 
 

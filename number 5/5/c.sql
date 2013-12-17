@@ -6,11 +6,11 @@ GO
 -- zeigt kein 48 weil er 0 untergeben hat ->  48 hat keinen assisten -> null
 
 -- optional
---WITH sdf
---    AS ( SELECT Mit.[reports to the Boss] AS empno ,
---			 COUNT ( * ) AS pocet
---		 FROM Mit
---		 GROUP BY Mit.[reports to the Boss] ) 
+WITH sdf
+    AS ( SELECT Mit.[reports to the Boss] AS empno ,
+			 COUNT ( * ) AS pocet
+		 FROM Mit
+		 GROUP BY Mit.[reports to the Boss] ) 
 --    -- table which has 32 rows / how employees reports to each his boss
   
 
@@ -38,18 +38,31 @@ GO
 		 Gehalt ,
 		 position
 	 FROM
-		 Mit s Left JOIN(SELECT Mit.[reports to the Boss] AS bossNumber ,
-						    COUNT ( * ) AS pocet_vyskytujiciV_tabulce
-					    FROM Mit
-					    GROUP BY Mit.[reports to the Boss])AS t
-		 ON t.pocet_vyskytujiciV_tabulce = s.[EMPl Id]
+		 Mit s Left JOIN sdf
+		 ON sdf.empno = s.[EMPl Id]
 
 	 --To produce the set of records only in Table A, but not in Table B, 
 	 --we perform the same left outer join, then exclude the records we don't want from the right side via a where clause.
 	 -- via Jeff @reddit
 	 WHERE Position = 'Supervisor'
 		  AND 
-		  t.pocet_vyskytujiciV_tabulce IS NULL;
+		  sdf.empno IS NULL;
   GO
+  -- geht nicht
+SELECT x.*
+  FROM Mit x
+  WHERE Position = 'Supervisor'
+	   AND 
+	   [EMPl Id] IN(SELECT [reports to the Boss]
+				   FROM Mit
+				   GROUP BY [reports to the Boss]
+				   HAVING COUNT ( * ) < 2)
+	   or
+	   Position = 'Supervisor'
+	   and 
+	   NOT EXISTS(SELECT *
+				 FROM Mit y
+				 WHERE x.[EMPl Id] = y.[EMPl Id]); 
+
 
 
