@@ -23,7 +23,7 @@ begin transaction
 select * from Fil where [Branch ID] = 'B001'
 
 --P4
-SET TRANSACTION ISOLATION LEVEL REPEATABLE READ
+SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
 begin transaction
 select * from Fil where [Branch ID] = 'B001'
 rollback TRANSACTION

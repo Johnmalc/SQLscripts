@@ -1,6 +1,7 @@
 -- Master
 USE [StayHomewithoutPer]
 GO
+
 BEGIN TRANSACTION
 GO
 
@@ -9,5 +10,5 @@ SET city = 'Reutlingen'
   WHERE [Branch ID] = 'B001'
 GO
 
-ROLLBACK TRANSACTION;
+Rollback TRANSACTION;
 GO
