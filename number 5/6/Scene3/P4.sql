@@ -1,18 +1,15 @@
 USE [StayHomewithoutPer]
 go
 
-
 SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
 go
+
 
 begin transaction
 go
 
-select * from Fil where [Branch ID] = 'B001'
+select * from Fil
 go
-
-rollback TRANSACTION
+commit transaction
 go
-
-
 
