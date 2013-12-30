@@ -8,5 +8,6 @@ go
 select * from Fil
 go
 
+commit
 rollback work
 go

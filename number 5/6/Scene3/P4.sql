@@ -4,7 +4,6 @@ go
 SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
 go
 
-
 begin transaction
 go
 
